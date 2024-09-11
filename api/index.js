@@ -27,10 +27,10 @@ app.use(
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
 //Use the routes
-app.use("/auth", authRoutes);
-app.use("/upload", uploadRoutes);
-app.use("/places", placeRoutes);
-app.use("/bookings", bookingRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/upload", uploadRoutes);
+app.use("/api/places", placeRoutes);
+app.use("/api/bookings", bookingRoutes);
 
 app.get("/test", (req, res) => {
   res.json("test okk");
