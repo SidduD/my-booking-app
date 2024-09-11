@@ -10,7 +10,6 @@ import { UserContextProvider } from "./contexts/UserContext";
 import axios from "axios";
 import AccountPage from "./pages/AccountPage";
 import PlacePage from "./pages/PlacePage";
-import BookingPage from "./pages/BookingPage";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 axios.defaults.withCredentials = true;
