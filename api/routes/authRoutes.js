@@ -56,24 +56,24 @@ router.get("/profile", async (req, res) => {
   await mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
 
-  try {
-    if (token) {
-      jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-        if (err) res.json(err);
-        const user = await User.findById(userData.id);
+  // try {
+  if (token) {
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if (err) res.json(err);
+      const user = await User.findById(userData.id);
 
-        if (!user) {
-          return res.status(404).json({ message: "User not found" });
-        }
-        const { name, email, id } = user;
-        res.json({ name, email, id });
-      });
-    } else {
-      res.json(null);
-    }
-  } catch (error) {
-    res.status(500).send({ message: error.message });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      const { name, email, id } = user;
+      res.json({ name, email, id });
+    });
+  } else {
+    res.json(null);
   }
+  // } catch (error) {
+  //   res.status(500).send({ message: error.message });
+  // }
 });
 
 router.post("/logout", (req, res) => {

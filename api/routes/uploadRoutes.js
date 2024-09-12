@@ -39,33 +39,33 @@ async function uploadToS3(path, originalFileName, mimetype) {
 router.post("/upload-by-link", async (req, res) => {
   const { link } = req.body;
   const newName = "photo" + Date.now() + ".jpg";
-  try {
-    await imageDownloader.image({
-      url: link,
-      dest: "/tmp/" + newName,
-    });
+  // try {
+  await imageDownloader.image({
+    url: link,
+    dest: "/tmp/" + newName,
+  });
 
-    const url = await uploadToS3("/tmp/" + newName, newName, mime.lookup("/tmp/" + newName));
+  const url = await uploadToS3("/tmp/" + newName, newName, mime.lookup("/tmp/" + newName));
 
-    res.json(url);
-  } catch (err) {
-    res.status(400).json(err.message);
-  }
+  res.json(url);
+  // } catch (err) {
+  //   res.status(400).json(err.message);
+  // }
 });
 
 router.post("/", photosMiddleware.array("photos", 100), async (req, res) => {
   const uploadedFiles = [];
 
-  try {
-    for (let i = 0; i < req.files.length; i++) {
-      const { path, originalname, mimetype } = req.files[i];
-      const url = await uploadToS3(path, originalname, mimetype);
-      uploadedFiles.push(url);
-    }
-    res.json(uploadedFiles);
-  } catch (error) {
-    res.status(500).send({ message: error.message });
+  // try {
+  for (let i = 0; i < req.files.length; i++) {
+    const { path, originalname, mimetype } = req.files[i];
+    const url = await uploadToS3(path, originalname, mimetype);
+    uploadedFiles.push(url);
   }
+  res.json(uploadedFiles);
+  // } catch (error) {
+  //   res.status(500).send({ message: error.message });
+  // }
 });
 
 module.exports = router;

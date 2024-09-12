@@ -16,40 +16,40 @@ function getUserDataFromReq(req) {
 }
 
 router.post("/", async (req, res) => {
-  try {
-    await mongoose.connect(process.env.MONGO_URL);
-    const userData = await getUserDataFromReq(req);
-    const { place, checkInDate, checkOutDate, phone, name, numGuests, price } = req.body;
+  // try {
+  await mongoose.connect(process.env.MONGO_URL);
+  const userData = await getUserDataFromReq(req);
+  const { place, checkInDate, checkOutDate, phone, name, numGuests, price } = req.body;
 
-    Booking.create({
-      place,
-      user: userData.id,
-      checkInDate,
-      checkOutDate,
-      phone,
-      name,
-      numGuests,
-      price,
+  Booking.create({
+    place,
+    user: userData.id,
+    checkInDate,
+    checkOutDate,
+    phone,
+    name,
+    numGuests,
+    price,
+  })
+    .then((doc) => {
+      res.json(doc);
     })
-      .then((doc) => {
-        res.json(doc);
-      })
-      .catch((err) => {
-        res.json(err);
-      });
-  } catch (error) {
-    res.status(500).send({ message: error.message });
-  }
+    .catch((err) => {
+      res.json(err);
+    });
+  // } catch (error) {
+  //   res.status(500).send({ message: error.message });
+  // }
 });
 
 router.get("/", async (req, res) => {
-  try {
-    await mongoose.connect(process.env.MONGO_URL);
-    const userData = await getUserDataFromReq(req);
-    res.json(await Booking.find({ user: userData.id }).populate("place"));
-  } catch (error) {
-    res.status(500).send({ message: error.message });
-  }
+  // try {
+  await mongoose.connect(process.env.MONGO_URL);
+  const userData = await getUserDataFromReq(req);
+  res.json(await Booking.find({ user: userData.id }).populate("place"));
+  // } catch (error) {
+  //   res.status(500).send({ message: error.message });
+  // }
 });
 
 module.exports = router;
