@@ -17,21 +17,11 @@ app.use(express.json());
 app.use(cookieParser());
 
 //Middleware for CORS policy
-const allowedOrigins = [
-  "http://localhost:5173", // Development URL
-  "https://siddu-mybookingapp.vercel.app/", // Production URL
-];
 
 app.use(
   cors({
     credentials: true,
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "http://localhost:5173",
   })
 );
 
