@@ -31,25 +31,25 @@ router.post("/login", async (req, res) => {
   await mongoose.connect(process.env.MONGO_URL);
   const { email, password } = req.body;
 
-  try {
-    const userDoc = await User.findOne({ email });
+  // try {
+  const userDoc = await User.findOne({ email });
 
-    if (userDoc) {
-      const passOk = bcrypt.compareSync(password, userDoc.password);
-      if (passOk) {
-        jwt.sign({ email: userDoc.email, id: userDoc._id }, jwtSecret, {}, (err, token) => {
-          if (err) res.json(err);
-          res.cookie("token", token, { httpOnly: true, sameSite: "lax" }).json(userDoc);
-        });
-      } else {
-        res.status(422).json("pass not ok");
-      }
+  if (userDoc) {
+    const passOk = bcrypt.compareSync(password, userDoc.password);
+    if (passOk) {
+      jwt.sign({ email: userDoc.email, id: userDoc._id }, jwtSecret, {}, (err, token) => {
+        if (err) res.json(err);
+        res.cookie("token", token, { httpOnly: true, sameSite: "lax" }).json(userDoc);
+      });
     } else {
-      res.status(401).json("User not found");
+      res.status(422).json("pass not ok");
     }
-  } catch (error) {
-    res.status(500).send({ message: error.message });
+  } else {
+    res.status(401).json("User not found");
   }
+  // } catch (error) {
+  //   res.status(500).send({ message: error.message });
+  // }
 });
 
 router.get("/profile", async (req, res) => {
