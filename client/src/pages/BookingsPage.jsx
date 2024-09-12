@@ -26,19 +26,19 @@ function BookingsPage() {
           <Link
             to={`/account/bookings/view?id=${booking._id}`}
             key={booking._id}
-            className="flex  mx-auto max-w-screen-2xl gap-4 bg-gray-200 rounded-2xl overflow-hidden my-4 transition duration-300 transform hover:scale-95 hover:opacity-100 opacity-90"
+            className="flex mx-auto max-w-screen-xl gap-4 bg-gray-200 rounded-2xl overflow-hidden my-8 transition duration-300 transform hover:scale-95 hover:opacity-100 opacity-90"
           >
-            <div className="w-48">
-              <PlaceImg place={booking.place} className="object-cover h-full" />
+            <div className="flex size-32 max-w-32 sm:size-48 sm:max-w-48">
+              <PlaceImg place={booking.place} className="object-cover" />
             </div>
             <div className="py-3 grow pr-3">
-              <h2 className="text-2xl font-bold">{booking.place.title}</h2>
+              <h2 className=" truncate-multiline1 sm:text-2xl font-bold">{booking.place.title}</h2>
 
-              <div className="text-xl border-t border-gray-600">
+              <div className="text-sm sm:text-xl border-t border-gray-600">
                 <BookingDates booking={booking} border={true} />
-                <div className="flex items-center  justify-start gap-1 mt-4">
+                <div className="flex items-center justify-end gap-1 mt-6">
                   <CiCreditCard1 className="size-6" />
-                  <span className="text-xl">Total Price: ${booking?.price}</span>
+                  <span className="text-sm sm:text-xl">Total Price: ${booking?.price}</span>
                 </div>
               </div>
             </div>

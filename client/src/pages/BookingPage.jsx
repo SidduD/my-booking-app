@@ -27,7 +27,7 @@ function BookingPage() {
 
   return (
     <div>
-      <h1 className="text-3xl">{booking?.place?.title}</h1>
+      <h1 className="text-sm sm:text-3xl">{booking?.place?.title}</h1>
       <AddressLink place={booking.place} />
       <div className="bg-gray-200 my-6 p-6 rounded-2xl flex items-center justify-between">
         <div>
