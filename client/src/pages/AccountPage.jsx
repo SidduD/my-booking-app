@@ -21,6 +21,7 @@ function AccountPage() {
   }
   if (ready && !user) {
     navigate("/login");
+    return null;
   }
 
   function getLinkClass(link) {

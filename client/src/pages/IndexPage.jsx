@@ -7,7 +7,9 @@ function IndexPage() {
   const [places, setPlaces] = useState(null);
   useEffect(() => {
     axios.get("/places").then((response) => {
-      setPlaces(response.data);
+      if (response.data) {
+        setPlaces(response.data);
+      }
     });
   }, []);
   return (

@@ -55,12 +55,17 @@ router.post("/upload-by-link", async (req, res) => {
 
 router.post("/", photosMiddleware.array("photos", 100), async (req, res) => {
   const uploadedFiles = [];
-  for (let i = 0; i < req.files.length; i++) {
-    const { path, originalname, mimetype } = req.files[i];
-    const url = await uploadToS3(path, originalname, mimetype);
-    uploadedFiles.push(url);
+
+  try {
+    for (let i = 0; i < req.files.length; i++) {
+      const { path, originalname, mimetype } = req.files[i];
+      const url = await uploadToS3(path, originalname, mimetype);
+      uploadedFiles.push(url);
+    }
+    res.json(uploadedFiles);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
   }
-  res.json(uploadedFiles);
 });
 
 module.exports = router;

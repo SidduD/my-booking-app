@@ -11,7 +11,7 @@ const jwtSecret = "ffdfdfdfdfdfdf";
 const mongoose = require("mongoose");
 
 router.post("/register", async (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  await mongoose.connect(process.env.MONGO_URL);
   const { name, email, password } = req.body;
 
   try {
@@ -28,43 +28,60 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  await mongoose.connect(process.env.MONGO_URL);
   const { email, password } = req.body;
 
-  const userDoc = await User.findOne({ email });
+  try {
+    const userDoc = await User.findOne({ email });
 
-  if (userDoc) {
-    const passOk = bcrypt.compareSync(password, userDoc.password);
-    if (passOk) {
-      jwt.sign({ email: userDoc.email, id: userDoc._id }, jwtSecret, {}, (err, token) => {
-        if (err) res.json(err);
-        res.cookie("token", token, { httpOnly: true, sameSite: "lax" }).json(userDoc);
-      });
+    if (userDoc) {
+      const passOk = bcrypt.compareSync(password, userDoc.password);
+      if (passOk) {
+        jwt.sign({ email: userDoc.email, id: userDoc._id }, jwtSecret, {}, (err, token) => {
+          if (err) res.json(err);
+          res.cookie("token", token, { httpOnly: true, sameSite: "lax" }).json(userDoc);
+        });
+      } else {
+        res.status(422).json("pass not ok");
+      }
     } else {
-      res.status(422).json("pass not ok");
+      res.status(401).json("User not found");
     }
-  } else {
-    res.json("not found");
+  } catch (error) {
+    res.status(500).send({ message: error.message });
   }
 });
 
-router.get("/profile", (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+router.get("/profile", async (req, res) => {
+  await mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
 
-  if (token) {
-    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-      if (err) res.json(err);
-      const { name, email, id } = await User.findById(userData.id);
-      res.json({ name, email, id });
-    });
-  } else {
-    res.json(null);
+  try {
+    if (token) {
+      jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+        if (err) res.json(err);
+        const user = await User.findById(userData.id);
+
+        if (!user) {
+          return res.status(404).json({ message: "User not found" });
+        }
+        const { name, email, id } = user;
+        res.json({ name, email, id });
+      });
+    } else {
+      res.json(null);
+    }
+  } catch (error) {
+    res.status(500).send({ message: error.message });
   }
 });
 
 router.post("/logout", (req, res) => {
-  res.cookie("token", "").json(true);
+  try {
+    res.cookie("token", "").json(true);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
 });
 
 module.exports = router;
