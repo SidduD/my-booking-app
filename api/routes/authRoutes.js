@@ -77,11 +77,11 @@ router.get("/profile", async (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  try {
-    res.cookie("token", "").json(true);
-  } catch (error) {
-    res.status(500).send({ message: error.message });
-  }
+  // try {
+  res.cookie("token", "").json(true);
+  // } catch (error) {
+  //   res.status(500).send({ message: error.message });
+  // }
 });
 
 module.exports = router;
