@@ -13,6 +13,7 @@ import { FaChessBoard } from "react-icons/fa6";
 import AccommodationFormLabel from "../ui/AccommodationFormLabel";
 import PerksItem from "../ui/PerksItem";
 import PhotosUpload from "../components/PhotosUpload";
+import CloseButton from "./CloseButton";
 
 function AccommodationsForm({ setTrigger }) {
   const [searchParams] = useSearchParams("id");
@@ -84,6 +85,9 @@ function AccommodationsForm({ setTrigger }) {
   }
   return (
     <div>
+      <CloseButton onClick={() => navigate("/account/places")} type="form">
+        X
+      </CloseButton>
       <form onSubmit={handleSubmit(onSubmit)}>
         <AccommodationFormLabel h2="Title" />
         <input type="text" placeholder="Title, ex: My Lovely Apt..." {...register("title")} />

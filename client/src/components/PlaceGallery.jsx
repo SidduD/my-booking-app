@@ -2,6 +2,7 @@ import { TbGridDots } from "react-icons/tb";
 import { IoMdClose } from "react-icons/io";
 import { useState } from "react";
 import Image from "./Image";
+import CloseButton from "./CloseButton";
 
 function PlaceGallery({ place }) {
   const [showAllPhotos, setShowAllPhotos] = useState(false);
@@ -10,13 +11,10 @@ function PlaceGallery({ place }) {
       <div className="absolute inset-0 bg-gray-300  min-h-screen">
         <div className="px-8 pt-8">
           <h2 className="text-3xl font-bold mr-36">Photos of {place?.title}</h2>
-          <button
-            onClick={() => setShowAllPhotos(false)}
-            className="fixed right-12 top-8 items-center flex gap-1 cursor-pointer bg-black text-white py-2 px-4 rounded-2xl shadow shadow-black"
-          >
+          <CloseButton onClick={() => setShowAllPhotos(false)}>
             <IoMdClose />
             <span className="hidden sm:block">Close Photos</span>
-          </button>
+          </CloseButton>
         </div>
         <div
           className={`p-8 bg-gray-300 grid  gap-4 ${place?.photos?.length === 1 ? "md:grid-cols-1" : "md:grid-cols-2"}`}

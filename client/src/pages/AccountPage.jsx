@@ -52,15 +52,15 @@ function AccountPage() {
       </div>
       <nav className="w-full flex justify-center my-4 gap-2 text-xs sm:text-lg">
         <Link to="/account" className={getLinkClass("profile")}>
-          <CiUser />
+          <CiUser className="size-6" />
           <span className="hidden sm:block">My Profile</span>
         </Link>
         <Link to="/account/bookings" className={getLinkClass("bookings")}>
-          <CiCircleList />
+          <CiCircleList className="size-6" />
           <span className="hidden sm:block">My Bookings</span>
         </Link>
         <Link to="/account/places" className={getLinkClass("places")}>
-          <HiOutlineBuildingLibrary />
+          <HiOutlineBuildingLibrary className="size-6" />
           <span className="hidden sm:block">My Accomodations</span>
         </Link>
       </nav>
