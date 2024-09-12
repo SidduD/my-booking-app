@@ -26,7 +26,7 @@ function BookingsPage() {
           <Link
             to={`/account/bookings/view?id=${booking._id}`}
             key={booking._id}
-            className="flex  mx-auto max-w-screen-2xl gap-4 bg-gray-200 rounded-2xl overflow-hidden my-4 transition duration-300 transform hover:scale-105 hover:opacity-100 opacity-90"
+            className="flex  mx-auto max-w-screen-2xl gap-4 bg-gray-200 rounded-2xl overflow-hidden my-4 transition duration-300 transform hover:scale-95 hover:opacity-100 opacity-90"
           >
             <div className="w-48">
               <PlaceImg place={booking.place} className="object-cover h-full" />

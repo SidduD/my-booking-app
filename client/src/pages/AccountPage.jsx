@@ -8,6 +8,8 @@ import BookingsPage from "./BookingsPage";
 import { CiUser } from "react-icons/ci";
 import { CiCircleList } from "react-icons/ci";
 import { HiOutlineBuildingLibrary } from "react-icons/hi2";
+import Button from "../components/Button";
+import BackButton from "../components/BackButton";
 
 function AccountPage() {
   const { ready, user, setUser } = useUser();
@@ -45,27 +47,30 @@ function AccountPage() {
 
   return (
     <div>
-      <nav className="w-full flex justify-center my-4 gap-2">
+      <div className="mt-4">
+        <BackButton />
+      </div>
+      <nav className="w-full flex justify-center my-4 gap-2 text-xs sm:text-lg">
         <Link to="/account" className={getLinkClass("profile")}>
           <CiUser />
-          My Profile
+          <span className="hidden sm:block">My Profile</span>
         </Link>
         <Link to="/account/bookings" className={getLinkClass("bookings")}>
           <CiCircleList />
-          My Bookings
+          <span className="hidden sm:block">My Bookings</span>
         </Link>
         <Link to="/account/places" className={getLinkClass("places")}>
           <HiOutlineBuildingLibrary />
-          My Accomodations
+          <span className="hidden sm:block">My Accomodations</span>
         </Link>
       </nav>
 
       {subpage === "profile" && (
-        <div className="text-center max-w-lg mx-auto ">
+        <div className="text-center max-w-lg mx-auto pt-4">
           Logged in as {user.name} ({user.email}) <br />
-          <button onClick={logout} className="bg-blue-500 p-2 w-full max-w-sm text-white rounded-2xl mt-2">
+          <Button type="primary2" onClick={logout}>
             Logout
-          </button>
+          </Button>
         </div>
       )}
 

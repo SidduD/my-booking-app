@@ -23,7 +23,7 @@ function IndexPage() {
               )}
             </div>
 
-            <h2 className="font-semibold">{place.address}</h2>
+            <h2 className="font-semibold truncate">{place.address}</h2>
             <h3 className="truncate text-gray-500">{place.title}</h3>
             <div className="mt-1">
               <span className="font-bold">${place.price} </span> per night

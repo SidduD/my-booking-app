@@ -55,14 +55,14 @@ function Header() {
 
       <Link
         to={user ? "/account" : "/login"}
-        className="flex items-center gap-2 border border-gray-300 rounded-full py-2 px-4"
+        className="flex items-center justify-between gap-2 border border-gray-300 rounded-full py-2 px-4"
       >
         <GiHamburgerMenu className="size-6 text-gray-500" />
         <div className=" bg-gray-500 text-white rounded-full border border-gray-500 overflow-hidden">
           <FaUser className="size-6 relative -bottom-1" />
         </div>
 
-        {user && <div>{user.name}</div>}
+        {user && <div className="hidden sm:block">{user.name}</div>}
       </Link>
     </header>
   );
