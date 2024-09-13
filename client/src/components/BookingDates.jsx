@@ -7,7 +7,7 @@ function BookingDates({ booking }) {
   if (!booking) return "";
 
   return (
-    <div className="text-sm sm:text-xl flex items-center gap-2  text-gray-500 mt-2">
+    <div className="text-sm sm:text-xl xs:flex items-center gap-2  text-gray-500 mt-2">
       <div className="flex items-center justify-start gap-1">
         <MdNightsStay className="size-6" />
         {differenceInCalendarDays(new Date(booking?.checkOutDate), new Date(booking?.checkInDate))} nights:

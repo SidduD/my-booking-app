@@ -28,15 +28,15 @@ function BookingsPage() {
             key={booking._id}
             className="flex mx-auto max-w-screen-xl gap-4 bg-gray-200 rounded-2xl overflow-hidden my-8 transition duration-300 transform hover:scale-95 hover:opacity-100 opacity-90"
           >
-            <div className="flex size-32 max-w-32 sm:size-48 sm:max-w-48">
+            <div className="flex max-w-36 sm:size-36 sm:max-w-36">
               <PlaceImg place={booking.place} className="object-cover" />
             </div>
             <div className="py-3 grow pr-3">
               <h2 className=" truncate-multiline1 sm:text-2xl font-bold">{booking.place.title}</h2>
 
-              <div className="text-sm sm:text-xl border-t border-gray-600">
+              <div className="text-xs sm:text-xl border-t border-gray-600">
                 <BookingDates booking={booking} border={true} />
-                <div className="flex items-center justify-end gap-1 mt-6">
+                <div className="flex items-center justify-end gap-1 mt-2 sm:mt-4">
                   <CiCreditCard1 className="size-6" />
                   <span className="text-sm sm:text-xl">Total Price: ${booking?.price}</span>
                 </div>

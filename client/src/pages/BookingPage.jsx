@@ -27,15 +27,17 @@ function BookingPage() {
 
   return (
     <div>
-      <h1 className="text-sm sm:text-3xl">{booking?.place?.title}</h1>
+      <h1 className=" text-lg font-semibold sm:text-3xl">{booking?.place?.title}</h1>
       <AddressLink place={booking.place} />
-      <div className="bg-gray-200 my-6 p-6 rounded-2xl flex items-center justify-between">
+      <div className="bg-gray-200 p-4 my-6 sm:p-6 rounded-2xl flex items-center justify-between">
         <div>
-          <h2 className="text-2xl">Your booking information :</h2>
-          <BookingDates booking={booking} border={false} />
+          <h2 className="text-lg sm:text-2xl">Your booking information:</h2>
+          <span className="text-xl">
+            <BookingDates booking={booking} />
+          </span>
         </div>
 
-        <div className="bg-blue-500 text-white p-6 rounded-2xl">
+        <div className="bg-blue-500 text-white  p-3 sm:p-6 rounded-2xl">
           <div>Total Price</div>
           <div className="text-3xl">${booking.price}</div>
         </div>
