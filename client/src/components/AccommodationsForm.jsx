@@ -108,14 +108,9 @@ function AccommodationsForm({ setTrigger }) {
 
         <AccommodationFormLabel h2="Perks" p="Select all the amenities that best describes your place" />
 
-        <div className=" mt-2 grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+        <div className="mt-2 grid gap-2 xs:grid-cols-2 text-xs sm:text-lg md:grid-cols-3">
           <PerksItem perk="Wifi" name="amenities.wifi" icon={<FaWifi />} register={register} />
-          <PerksItem
-            perk="Free parking on premises"
-            name="amenities.freeParking"
-            icon={<FaParking />}
-            register={register}
-          />
+          <PerksItem perk="Free parking" name="amenities.freeParking" icon={<FaParking />} register={register} />
           <PerksItem perk="TV" name="amenities.tv" icon={<IoTvSharp />} register={register} />
           <PerksItem perk="Pets" name="amenities.pets" icon={<FaDog />} register={register} />
           <PerksItem
@@ -131,7 +126,7 @@ function AccommodationsForm({ setTrigger }) {
         <textarea {...register("extraInfo")} />
 
         <AccommodationFormLabel h2="Accommodation Details" />
-        <div className="grid gap-3 sm:grid-cols-4 items-center relative">
+        <div className="grid gap-3 xs:grid-cols-2 sm:grid-cols-4 items-center">
           <div>
             <h3 className="text-gray-500 text-sm">Check in time</h3>
             <input type="text" placeholder="15:00" {...register("checkIn")} />
@@ -145,9 +140,9 @@ function AccommodationsForm({ setTrigger }) {
             <input type="text" placeholder="170" {...register("price")} />
           </div>
 
-          <div className="ml-5 flex flex-col items-center absolute right-1">
+          <div>
             <h3 className="text-gray-500 text-sm font-semibold">Max number of guests</h3>
-            <select className="p-2 my-1 w-full max-w-32 text-center border rounded-2xl" {...register("maxGuests")}>
+            <select className="p-2 my-1 w-full text-center border rounded-xl" {...register("maxGuests")}>
               {[...Array(10)].map((_, index) => (
                 <option key={index + 1} value={index + 1}>
                   {index + 1}

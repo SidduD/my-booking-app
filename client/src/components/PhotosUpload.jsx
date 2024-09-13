@@ -79,10 +79,10 @@ function PhotosUpload({ reset, watch, register, setAddedPhotos, addedPhotos }) {
               </button>
             </div>
           ))}
-        <label className=" h-32 border bg-transparent rounded-xl hover:bg-gray-200 cursor-pointer text-2xl text-gray-600 flex items-center gap-1 justify-center">
+        <label className=" h-16 xs:h-24 sm:h-32 border bg-transparent rounded-xl hover:bg-gray-200 cursor-pointer text-2xl text-gray-600 flex items-center gap-1 justify-center">
           <input type="file" multiple className="hidden" onChange={uploadPhoto} />
-          <IoCloudUploadOutline className="size-8" />
-          <span>Upload</span>
+          <IoCloudUploadOutline className="size-4 sm:size-8 xs:size-6" />
+          <span className=" text-sm xs:text-lg sm:text-xl">Upload</span>
         </label>
       </div>
     </>
