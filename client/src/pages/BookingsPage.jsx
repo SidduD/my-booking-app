@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import BookingPage from "./BookingPage";
 import PlaceImg from "../components/PlaceImg";
-import BackButton from "../components/BackButton";
 
 import { CiCreditCard1 } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -35,7 +34,7 @@ function BookingsPage() {
             key={booking?._id}
             className=" relative flex mx-auto max-w-screen-xl gap-4 bg-gray-200 rounded-2xl overflow-hidden my-8 transition duration-300 transform hover:scale-95 hover:opacity-100 opacity-90"
           >
-            <div className="absolute grow right-4 top-4" onClick={(e) => handleDelete(booking?._id, e)}>
+            <div className="absolute grow right-4 top-4 ml-3" onClick={(e) => handleDelete(booking?._id, e)}>
               <FaRegTrashAlt className="text-red-600" />
             </div>
             <div className="flex max-w-36 sm:size-36 sm:max-w-36">

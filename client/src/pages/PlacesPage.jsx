@@ -56,7 +56,7 @@ function PlacesPage() {
                 className="mb-4 flex cursor-pointer gap-4 bg-gray-100 p-4 max-w-screen-xl mx-auto rounded-2xl transition duration-300 transform hover:scale-95 hover:opacity-100 opacity-90"
               >
                 <div className="relative flex grow items-center sm:items-start gap-3">
-                  <div className="absolute right-2 top-2" onClick={(e) => handleDelete(place._id, e)}>
+                  <div className="absolute right-2 top-2 ml-3" onClick={(e) => handleDelete(place._id, e)}>
                     <FaRegTrashAlt className="text-red-600" />
                   </div>
                   <div className="flex size-24 max-w-24 sm:size-32 sm:max-w-32 bg-gray-300 grow shrink-0 rounded-2xl">
