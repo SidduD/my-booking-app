@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import Image from "../components/Image";
 import PlacesOperations from "../components/PlacesOperations";
+import Loader from "../components/Loader";
 
 function IndexPage() {
   const [places, setPlaces] = useState(null);
   const [searchParams] = useSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   //Filter
   const filterValue = searchParams.get("country") || "all";
@@ -45,12 +47,18 @@ function IndexPage() {
   });
 
   useEffect(() => {
+    setIsLoading(true);
     axios.get("/places").then((response) => {
       if (response.data) {
         setPlaces(response.data);
+        setIsLoading(false);
       }
     });
   }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
