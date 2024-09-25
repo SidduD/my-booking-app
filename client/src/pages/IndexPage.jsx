@@ -54,7 +54,7 @@ function IndexPage() {
 
   return (
     <>
-      <div className="flex justify-center mt-4">
+      <div className="mt-8">
         <PlacesOperations />
       </div>
       <div className="mt-8 grid gap-6 gap-y-8 gap-row grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

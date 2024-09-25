@@ -3,15 +3,18 @@ import SortBy from "./SortBy";
 
 function PlacesOperations() {
   return (
-    <div className="flex items-center justify-center grow gap-4">
-      <Filter
-        filterField="country"
-        options={[
-          { value: "all", label: "All" },
-          { value: "canada", label: "Canada" },
-          { value: "usa", label: "USA" },
-        ]}
-      />
+    <div className="grid sm:flex items-center justify-center grow gap-4">
+      <div className="sm:flex items-center gap-2">
+        <h2 className="font-semibold">Filter By Country:</h2>
+        <Filter
+          filterField="country"
+          options={[
+            { value: "all", label: "All" },
+            { value: "canada", label: "Canada" },
+            { value: "usa", label: "USA" },
+          ]}
+        />
+      </div>
 
       <SortBy
         options={[
