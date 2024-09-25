@@ -1,8 +1,10 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const Place = require("../models/Place");
+const Booking = require("../models/Booking");
 const router = express.Router();
 const mongoose = require("mongoose");
+const { deleteFromS3 } = require("../s3utils");
 
 const jwtSecret = "ffdfdfdfdfdfdf";
 
@@ -15,6 +17,7 @@ function getUserDataFromReq(req) {
   });
 }
 
+//Create a new place
 router.post("/", async (req, res) => {
   await mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
@@ -59,6 +62,7 @@ router.get("/user-places", async (req, res) => {
   // }
 });
 
+//Get a specific place based on id
 router.get("/:id", async (req, res) => {
   await mongoose.connect(process.env.MONGO_URL);
   const { id } = req.params;
@@ -69,6 +73,7 @@ router.get("/:id", async (req, res) => {
   // }
 });
 
+//Update a specifc place based on id
 router.put("/:id", async (req, res) => {
   await mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
@@ -100,9 +105,38 @@ router.put("/:id", async (req, res) => {
   // }
 });
 
+//Delete a place based on id
+router.delete("/:id", async (req, res) => {
+  await mongoose.connect(process.env.MONGO_URL);
+  try {
+    const { token } = req.cookies;
+    const { id } = req.params;
+
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      const place = await Place.findById(id);
+      if (!place) {
+        return res.status(404).json({ message: "Place not found" });
+      }
+      // Delete associated photos from S3
+      const deletePromises = place.photos.map((photoUrl) => deleteFromS3(photoUrl));
+      await Promise.all(deletePromises);
+
+      await Place.findByIdAndDelete(id);
+
+      await Booking.deleteMany({ place: id });
+
+      return res.status(200).send({ message: "Place and associated booking deleted successfully" });
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
 //Get all the places in the database
 router.get("/", async (req, res) => {
   await mongoose.connect(process.env.MONGO_URL);
+
   // try {
   res.json(await Place.find());
   // } catch (error) {

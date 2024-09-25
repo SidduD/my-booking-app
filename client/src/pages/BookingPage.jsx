@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import AddressLink from "../components/AddressLink";
 import PlaceGallery from "../components/PlaceGallery";
 import BookingDates from "../components/BookingDates";
+import BackButton from "../components/BackButton";
 
 function BookingPage() {
   const [searchParams] = useSearchParams();
@@ -27,6 +28,9 @@ function BookingPage() {
 
   return (
     <div className="mt-8">
+      <div className="mt-4">
+        <BackButton backOptions="/account/bookings" />
+      </div>
       <h1 className="text-lg font-semibold sm:text-3xl">{booking?.place?.title}</h1>
       <AddressLink place={booking.place} />
       <div className="bg-gray-200 p-4 my-6 sm:p-6 rounded-2xl flex items-center justify-between">

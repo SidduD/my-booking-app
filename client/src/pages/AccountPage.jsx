@@ -9,7 +9,6 @@ import { CiUser } from "react-icons/ci";
 import { CiCircleList } from "react-icons/ci";
 import { HiOutlineBuildingLibrary } from "react-icons/hi2";
 import Button from "../components/Button";
-import BackButton from "../components/BackButton";
 
 function AccountPage() {
   const { ready, user, setUser } = useUser();
@@ -47,9 +46,6 @@ function AccountPage() {
 
   return (
     <div>
-      <div className="mt-4">
-        <BackButton />
-      </div>
       <nav className="w-full flex justify-center my-4 gap-2 text-xs sm:text-lg">
         <Link to="/account" className={getLinkClass("profile")}>
           <CiUser className="size-6" />
