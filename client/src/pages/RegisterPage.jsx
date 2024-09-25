@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 function RegisterPage() {
   const [name, setName] = useState("");
@@ -18,10 +19,10 @@ function RegisterPage() {
         email,
         password,
       });
-      alert("Registration successful. Now you can log in");
+      toast.success("Registration successful. Log in!");
       navigate("/login");
     } catch (error) {
-      alert("Registration failed, please try again with valid inputs");
+      toast.error("Registration failed, please try again with valid inputs");
     }
   }
 

@@ -8,7 +8,6 @@ function Button({ children, onClick, type }) {
     else return back;
   }
 
-  console.log(type);
   return (
     <button onClick={onClick} className={`font-inherit text-sm sm:text-lg  cursor pointer ${buttonType(type)}`}>
       {children}

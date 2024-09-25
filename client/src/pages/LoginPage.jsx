@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
+import toast from "react-hot-toast";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ function LoginPage() {
       setUser(data);
       navigate("/");
     } catch (error) {
-      alert("Login failed");
+      toast.error("Login failed");
     }
   }
 

@@ -24,7 +24,7 @@ function PlacePage() {
 
   return (
     <div className="mt-4 bg-gray-100 -mx-8 px-8 pt-8">
-      <BackButton />
+      <BackButton backOptions={-1} />
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl capitalize">{place.title}</h1>
 

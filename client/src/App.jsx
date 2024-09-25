@@ -11,6 +11,7 @@ import axios from "axios";
 import AccountPage from "./pages/AccountPage";
 import PlacePage from "./pages/PlacePage";
 
+import { Toaster } from "react-hot-toast";
 axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 axios.defaults.withCredentials = true;
 
@@ -27,6 +28,26 @@ function App() {
           <Route path="/place/:id" element={<PlacePage />} />
         </Route>
       </Routes>
+      <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{ margin: "8px" }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: "black",
+            color: "white",
+          },
+        }}
+      />
     </UserContextProvider>
   );
 }

@@ -14,6 +14,7 @@ import AccommodationFormLabel from "../ui/AccommodationFormLabel";
 import PerksItem from "../ui/PerksItem";
 import PhotosUpload from "../components/PhotosUpload";
 import CloseButton from "./CloseButton";
+import toast from "react-hot-toast";
 
 function AccommodationsForm({ setTrigger }) {
   const [searchParams] = useSearchParams("id");
@@ -73,9 +74,19 @@ function AccommodationsForm({ setTrigger }) {
     };
 
     if (isEditingSession) {
-      await axios.put(`/places/${placeId}`, { ...sendData, placeId });
+      try {
+        await axios.put(`/places/${placeId}`, { ...sendData, placeId });
+        toast.success("Successfully updated place");
+      } catch (error) {
+        toast.error("Error updating place");
+      }
     } else {
-      await axios.post("/places", sendData);
+      try {
+        await axios.post("/places", sendData);
+        toast.success("Successfully created place");
+      } catch (error) {
+        toast.error("Error creating place");
+      }
     }
 
     setAddedPhotos([]);
